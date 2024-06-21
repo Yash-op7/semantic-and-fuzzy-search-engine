@@ -7,18 +7,23 @@ import { useRef, useState, useTransition } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 const SearchBar = () => {
-  const searchParams = useSearchParams()
-  const defaultQuery = searchParams.get("query") || ''
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [isSearching, startTransition] = useTransition()
-  const router = useRouter()
-  const [query, setQuery] = useState<string>(defaultQuery)
+  // const searchParams = useSearchParams()
+  // const defaultQuery = searchParams.get("query") || ''
+  // const inputRef = useRef<HTMLInputElement>(null)
+  // const [isSearching, startTransition] = useTransition()
+  // const router = useRouter()
+  // const [query, setQuery] = useState<string>(defaultQuery)
 
-  const search = () => {
-    startTransition(() => {
-      router.push(`/search?query=${query}`)
-    })
-  }
+  // const search = () => {
+  //   startTransition(() => {
+  //     router.push(`/search?query=${query}`)
+  //   })
+  // }
+
+  const [isSearching, setIsSearching] = useState(); 
+  const [query, setQuery] = useState(); 
+  const [inputRef, searchf] = useState(); 
+  const search = () => {}
 
   return (
     <div className='relative w-full h-14 flex flex-col bg-white'>
@@ -26,14 +31,14 @@ const SearchBar = () => {
         <Input
           disabled={isSearching}
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          // onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              search()
+              // search()
             }
 
             if (e.key === 'Escape') {
-              inputRef?.current?.blur()
+              // inputRef?.current?.blur()
             }
           }}
           ref={inputRef}
