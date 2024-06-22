@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker'
 import { neon } from '@neondatabase/serverless'
-// import { Index } from '@upstash/vector'
+import { Index } from '@upstash/vector'
 import * as dotenv from 'dotenv'
 import { drizzle } from 'drizzle-orm/neon-http'
-// import { vectorize } from '../lib/vectorize'
+import { vectorize } from '../lib/vectorize'
 import { productsTable } from './schema'
 
 dotenv.config()

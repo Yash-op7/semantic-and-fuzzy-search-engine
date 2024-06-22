@@ -4,7 +4,7 @@ import { vectorize } from '@/lib/vectorize'
 import { Index } from '@upstash/vector'
 import { sql } from 'drizzle-orm'
 import { X } from 'lucide-react'
-import Image from 'next/image'pn
+import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
@@ -46,13 +46,13 @@ const Page = async ({ searchParams }: PageProps) => {
     const vector = await vectorize(query)
 
     const res = await index.query({
-      topK: 5,
-      vector,
+      topK: 5,      // how many search results
+      vector,       // vector to search
       includeMetadata: true,
     })
 
     const vectorProducts = res
-      .filter((existingProduct) => {
+      .filter((existingProduct) => {      // filter out duplicates in semantic search results with respect to full text search
         if (
           products.some((product) => product.id === existingProduct.id) ||
           existingProduct.score < 0.9
