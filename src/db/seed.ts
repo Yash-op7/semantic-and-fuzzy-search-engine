@@ -8,7 +8,11 @@ import { productsTable } from './schema'
 
 dotenv.config()
 
-const index = new Index() 
+// const index = new Index() 
+const index = new Index({
+  url: "https://busy-ox-38310-us1-vector.upstash.io",
+  token: "ABEFMGJ1c3ktb3gtMzgzMTAtdXMxYWRtaW5PVFF6WkRobVpESXRZVGhtTWkwMFl6STRMVGhrWmpVdFlUaGxOR016WkRFeE5UWXc=",
+})
 
 async function main() {
   const connector = neon(process.env.DATABASE_URL!)
@@ -140,7 +144,8 @@ async function main() {
 
     await index.upsert({
       id: product.id!,
-      vector: await vectorize(`${product.name}: ${product.description}`),
+      // vector: await vectorize(`${product.name}: ${product.description}`),
+      data: (product.name + product.description),
       metadata: {
         id: product.id,
         name: product.name,
