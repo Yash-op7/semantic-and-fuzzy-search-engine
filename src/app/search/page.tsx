@@ -72,7 +72,7 @@ const Page = async ({ searchParams }: PageProps) => {
     });
       const vectorProducts = res.filter(
         (existingProduct) => {
-          if(Object.keys(existingProduct.metadata).length < 2 ||  products.some((product) => product.id === existingProduct.id) || existingProduct.score < 0.7) {
+          if(Object.keys(existingProduct.metadata).length < 2 ||  products.some((product) => product.id === existingProduct.id) || existingProduct.score < 0.9) {
             return false;
           } else {
             return true;
@@ -88,23 +88,23 @@ const Page = async ({ searchParams }: PageProps) => {
     // });
     
   }
-  // if (products.length < 3) {
-  //   const fuzzyProductsByName: Product[] = await db
-  //     .select()
-  //     .from(productsTable)
-  //     .where(sql`similarity(${productsTable.name}, ${query}) > 0.3`)
-  //     .orderBy(sql`similarity(${productsTable.name}, ${query}) DESC`)
-  //     .limit(3 - products.length);
+  if (products.length < 3) {
+    const fuzzyProductsByName: Product[] = await db
+      .select()
+      .from(productsTable)
+      .where(sql`similarity(${productsTable.name}, ${query}) > 0.2`)
+      .orderBy(sql`similarity(${productsTable.name}, ${query}) DESC`)
+      .limit(3 - products.length);
 
-  //   const fuzzyProductsByDescription: Product[] = await db
-  //     .select()
-  //     .from(productsTable)
-  //     .where(sql`similarity(${productsTable.description}, ${query}) > 0.3`)
-  //     .orderBy(sql`similarity(${productsTable.description}, ${query}) DESC`)
-  //     .limit(3 - products.length - fuzzyProductsByName.length);
+    const fuzzyProductsByDescription: Product[] = await db
+      .select()
+      .from(productsTable)
+      .where(sql`similarity(${productsTable.description}, ${query}) > 0.2`)
+      .orderBy(sql`similarity(${productsTable.description}, ${query}) DESC`)
+      .limit(3 - products.length - fuzzyProductsByName.length);
 
-  //   products = products.concat(fuzzyProductsByName, fuzzyProductsByDescription);
-  // }
+    products = products.concat(fuzzyProductsByName, fuzzyProductsByDescription);
+  }
 
 
 
