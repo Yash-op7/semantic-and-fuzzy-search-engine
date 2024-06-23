@@ -16,7 +16,6 @@ const index = new Index({
 
 async function main() {
   const connector = neon(process.env.DATABASE_URL!)
-  // @ts-expect-error neon-drizzle
   const db = drizzle(connector)
 
   const products: (typeof productsTable.$inferInsert)[] = []
