@@ -54,7 +54,7 @@ export default function RootLayout({
               <p className='max-w-xl text-center text-lg text-slate-700 line-clamp-3'>
                 A beautifully designed, hybrid search engine that enhances
                 search accuracy by querying semantically related results.
-                (As this is a personal project for demo purposes only, the db only contains information about jackets, I will add more items in the future)
+                (The database only contains information about jackets, I will add more items in the future.)
               </p>
 
               <div className='mx-auto mt-16 w-full max-w-2xl flex flex-col'>
