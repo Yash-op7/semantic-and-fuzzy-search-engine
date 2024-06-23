@@ -72,7 +72,8 @@ const Page = async ({ searchParams }: PageProps) => {
     });
       const vectorProducts = res.filter(
         (existingProduct) => {
-          if(Object.keys(existingProduct.metadata).length < 2 ||  products.some((product) => product.id === existingProduct.id) || existingProduct.score < 0.9) {
+          const metadata = existingProduct.metadata || {};
+          if(Object.keys(metadata).length < 2 ||  products.some((product) => product.id === existingProduct.id) || existingProduct.score < 0.9) {
             return false;
           } else {
             return true;
